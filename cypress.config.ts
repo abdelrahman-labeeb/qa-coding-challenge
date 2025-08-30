@@ -22,9 +22,8 @@ export default defineConfig({
     e2e: {
         baseUrl: "https://www.demoblaze.com",
         specPattern: "cypress/e2e/**/*.cy.ts",
-        env: {
-            apiBaseUrl: "https://simple-books-api.click"
-        },
+        supportFile: "cypress/support/e2e.ts",
+        env: {apiBaseUrl: "https://simple-books-api.click"},
         setupNodeEvents(on, config) {
             console.log('[CTR] installLogsPrinter attached');
             installLogsPrinter(on, {
