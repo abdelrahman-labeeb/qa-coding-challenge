@@ -27,11 +27,12 @@ export default defineConfig({
         },
         setupNodeEvents(on, config) {
             installLogsPrinter(on, {
-                printLogsToConsole: 'always', // or 'onFail'
+                printLogsToConsole: 'always',
                 includeSuccessfulHookLogs: false,
-                outputRoot: 'results/ctr',
+                outputRoot: "results/ctr",
                 outputTarget: {
-                    'cypress-terminal-report.txt': 'txt'
+                    "cypress-terminal-report.txt": "txt",
+                    "cypress-terminal-report.json": "json",
                 }
             })
             return config
