@@ -11,8 +11,6 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci
-      - name: Show Cypress resolved config
-        run: npx cypress config --resolve
       - name: Run API tests
         run: npx cypress run --spec "cypress/e2e/api/**/*.cy.ts"
 

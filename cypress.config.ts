@@ -26,6 +26,7 @@ export default defineConfig({
             apiBaseUrl: "https://simple-books-api.click"
         },
         setupNodeEvents(on, config) {
+            console.log('[CTR] installLogsPrinter attached');
             installLogsPrinter(on, {
                 printLogsToConsole: 'always',
                 includeSuccessfulHookLogs: false,
