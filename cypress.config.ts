@@ -1,7 +1,11 @@
 import { defineConfig } from "cypress";
 
 export default defineConfig({
-    video: false,
+    reporterOptions: {
+        reportDir: 'cypress/results/reports',
+    },
+    screenshotsFolder: 'cypress/results/screenshots',
+    videosFolder: 'cypress/results/videos',
     retries: {
         runMode: 2,
         openMode: 0
