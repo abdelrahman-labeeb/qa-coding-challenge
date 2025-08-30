@@ -1,2 +1,7 @@
 # Ignore a specific file
 AL_README.txt
+
+# Cypress asset folders to exclude from source control
+cypress/downloads/
+cypress/screenshots/
+cypress/videos/
