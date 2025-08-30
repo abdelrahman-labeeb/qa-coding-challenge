@@ -6,6 +6,7 @@ cypress/downloads/
 cypress/screenshots/
 cypress/videos/
 cypress/results/*
+results/*
 
 
 /test-results.xml

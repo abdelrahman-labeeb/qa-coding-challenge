@@ -9,7 +9,8 @@
     "strict": true,
     "types": [
       "cypress"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "**/*.ts"

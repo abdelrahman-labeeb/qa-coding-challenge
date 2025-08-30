@@ -1,8 +1,16 @@
 import { defineConfig } from "cypress";
+import installLogsPrinter from 'cypress-terminal-report/src/installLogsPrinter'
+
 
 export default defineConfig({
+    reporter: 'cypress-multi-reporters',
     reporterOptions: {
+        reporterEnabled: 'spec, mocha-junit-reporter',
         reportDir: 'cypress/results/reports',
+        mochaJunitReporterReporterOptions: {
+            mochaFile: 'results/junit/results-[hash].xml',
+            toConsole: true
+        }
     },
     screenshotsFolder: 'cypress/results/screenshots',
     videosFolder: 'cypress/results/videos',
@@ -17,6 +25,16 @@ export default defineConfig({
         env: {
             apiBaseUrl: "https://simple-books-api.click"
         },
-        setupNodeEvents(on, config) { return config; }
+        setupNodeEvents(on, config) {
+            installLogsPrinter(on, {
+                printLogsToConsole: 'always', // or 'onFail'
+                includeSuccessfulHookLogs: false,
+                outputRoot: 'results/ctr',
+                outputTarget: {
+                    'cypress-terminal-report.txt': 'txt'
+                }
+            })
+            return config
+        }
     }
 });
