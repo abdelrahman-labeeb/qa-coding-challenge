@@ -1,1 +1,5 @@
-import './commands'
+import './commands/cart'
+import './commands/commands'
+import './commands/home'
+import './commands/login'
+import './commands/registration'
