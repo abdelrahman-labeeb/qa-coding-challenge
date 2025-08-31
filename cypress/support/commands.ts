@@ -21,7 +21,11 @@ declare global {
 
             addProductsToCart(numberOfProductsToAdd?: number): Chainable<void>;
 
+            fillLoginModalAndSubmit(username: string, password: string): Chainable<void>;
+
             login(username: string, password: string): Chainable<void>;
+
+            loginWithInvalidCredentials(username: string, password: string, errMsg: string): Chainable<void>;
 
             signup(u?: string, p?: string): Chainable<{username:string,password:string}>;
         }

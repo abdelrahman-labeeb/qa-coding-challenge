@@ -17,14 +17,17 @@ Cypress.Commands.add("signup", (u?: string, p?: string) => {
     cy.get("#sign-password").type(password, {force: true});
     cy.get('#sign-password').should("have.value", password);
 
-    cy.window().then((win) => {
-        cy.stub(win, 'alert').as('alertStub')
-    })
-    cy.contains("#signInModal > div > div > div.modal-footer > button.btn.btn-primary", "Sign up").click({ force: true });
+    cy.intercept('POST', 'https://api.demoblaze.com/signup').as('signupRequest');
 
-    cy.get('@alertStub').should('have.been.calledOnce');
-    // cy.on("window:alert", (txt) => expect(txt).to.contains("Sign up successful."));
-    // cy.reload();
+    cy.contains("#signInModal > div > div > div.modal-footer > button.btn.btn-primary", "Sign up")
+        .click({ force: true });
+
+    cy.wait('@signupRequest')
+
+    cy.on('window:alert', (text) => {
+        expect(text).to.contains("Sign up successful.");
+    });
+
     cy.window().its('document.readyState').should('eq', 'complete');
 
     return cy.wrap({ username, password });

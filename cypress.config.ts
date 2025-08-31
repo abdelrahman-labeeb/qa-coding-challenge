@@ -9,6 +9,7 @@ export default defineConfig({
         openMode: 0
     },
     defaultCommandTimeout: 10000,
+    responseTimeout: 15000,
     e2e: {
         baseUrl: "https://www.demoblaze.com",
         specPattern: "cypress/e2e/**/*.cy.ts",
