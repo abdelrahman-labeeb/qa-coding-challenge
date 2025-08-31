@@ -29,12 +29,3 @@ Cypress.Commands.add("signup", (u?: string, p?: string) => {
 
     return cy.wrap({ username, password });
 });
-
-declare global {
-    namespace Cypress {
-        interface Chainable {
-            signup(u?: string, p?: string): Chainable<{username:string,password:string}>;
-        }
-    }
-}
-export {};

@@ -19,12 +19,3 @@ Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) =>
         cy.contains("#nava", "PRODUCT STORE").click({ force: true });
     }
 });
-
-declare global {
-    namespace Cypress {
-        interface Chainable {
-            addProductsToCart(numberOfProductsToAdd?: number): Chainable<void>;
-        }
-    }
-}
-export {};

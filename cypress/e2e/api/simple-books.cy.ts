@@ -2,17 +2,6 @@ import {faker} from "@faker-js/faker";
 
 const baseUrl = Cypress.env("apiBaseUrl");
 
-function registerClient() {
-    return cy.request({
-        method: "POST",
-        url: `${baseUrl}/api-clients`,
-        body: {
-            clientName: faker.person.fullName(),
-            clientEmail: `qa+${Date.now()}@example.com`,
-        }
-    }).its("body").then(b => b.accessToken as string);
-}
-
 describe("Simple Books API", () => {
     let token: string;
     let availableBookId: number;
@@ -24,7 +13,7 @@ describe("Simple Books API", () => {
             availableBookId = books[0].id;
         });
         // auth
-        registerClient().then((t) => (token = t));
+        cy.registerClient().then((t) => (token = t));
     });
 
     it("list books with limit & returns N items", () => {

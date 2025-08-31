@@ -15,12 +15,3 @@ Cypress.Commands.add("login", (username: string, password: string) => {
     cy.contains("#logInModal > div > div > div.modal-footer > button.btn.btn-primary", "Log in").click({ force: true });
     cy.contains("#nameofuser", username);
 });
-
-declare global {
-    namespace Cypress {
-        interface Chainable {
-            login(username: string, password: string): Chainable<void>;
-        }
-    }
-}
-export {};

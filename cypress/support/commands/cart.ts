@@ -85,21 +85,3 @@ Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
 
     cy.get("#tbodyid tr").should("have.length", 0);
 });
-
-declare global {
-    namespace Cypress {
-        interface Chainable {
-            openCartAndValidateTotalOrderPrice(numberOfProductsAddedToCart?: number): Chainable<void>;
-
-            deleteProductFromCartAndValidateProductsSumPriceAndCartPrice(numberOfProductsInCart?: number): Chainable<void>;
-
-            validateProductsSumPriceAndCartPrice(): Chainable<void>;
-
-            fillOrderInfo(): Chainable<void>;
-
-            submitOderAndConfirmSuccessfulPurchase(): Chainable<void>;
-        }
-    }
-}
-
-export {};
