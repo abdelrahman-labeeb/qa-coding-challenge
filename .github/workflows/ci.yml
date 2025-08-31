@@ -19,7 +19,7 @@ jobs:
         if: always()
         with:
             name: cypress-videos
-            path: cypress/videos/**
+            path: cypress/results/videos/**
             if-no-files-found: ignore
 
       - name: Upload Cypress screenshots
@@ -27,7 +27,7 @@ jobs:
         if: always()
         with:
             name: cypress-screenshots
-            path: cypress/screenshots/**
+            path: cypress/results/screenshots/**
             if-no-files-found: ignore
 
   cypress-api:
