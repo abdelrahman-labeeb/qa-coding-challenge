@@ -62,6 +62,9 @@ Cypress.Commands.add("fillOrderInfo", () => {
 });
 
 Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
+    // once order successfully completed, this request is fired to clear cart
+    cy.intercept('POST', 'https://api.demoblaze.com/deletecart').as('deleteCart');
+
     cy.contains("button", "Purchase").should("not.be.disabled");
     cy.contains("button", "Purchase").click({ force: true });
 
@@ -69,6 +72,9 @@ Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
 
     cy.contains("OK").should("be.visible").and("not.be.disabled");
     cy.contains("OK").click({ force: true });
+
+    cy.wait('@deleteCart').its('response.statusCode').should('eq', 200)
+
 
     cy.visit("/");
     cy.window().its('document.readyState').should('eq', 'complete');
