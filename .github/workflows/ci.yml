@@ -12,7 +12,23 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
       - name: Run UI tests
-        run: npx cypress run --browser chrome --spec "cypress/e2e/ui/**/*.cy.ts"
+        run: npx cypress run --browser chrome --spec "cypress/e2e/ui/**/*.cy.ts" --config video=true
+
+      - name: Upload Cypress videos
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+            name: cypress-videos
+            path: cypress/videos/**
+            if-no-files-found: ignore
+
+      - name: Upload Cypress screenshots
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+            name: cypress-screenshots
+            path: cypress/screenshots/**
+            if-no-files-found: ignore
 
   cypress-api:
     runs-on: ubuntu-latest
