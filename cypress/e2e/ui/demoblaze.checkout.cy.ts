@@ -16,10 +16,8 @@ describe("Demoblaze checkout tests", () => {
     });
 
     it("purchase with empty form should fail", () => {
-        cy.contains("#cartur", "Cart").should("be.visible").and("not.be.disabled");
-        cy.contains("#cartur", "Cart").click({ force: true });
-        cy.contains("button", "Place Order").should("be.visible").and("not.be.disabled");
-        cy.contains("button", "Place Order").click({ force: true });
+        cy.clickButton("#cartur", "Cart");
+        cy.clickButtonContainsTxt("Place Order");
         cy.get('#orderModal').should('be.visible');
         cy.contains("button", "Purchase").should("not.be.disabled");
         cy.contains("button", "Purchase").click({ force: true });

@@ -4,13 +4,7 @@ Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) =>
         cy.get(".card-title a").eq(i).should("be.visible").and("not.be.disabled");
         cy.get(".card-title a").eq(i).click({force: true});
 
-        cy.contains("#tbodyid > div.row > div > a", "Add to cart")
-            .should("be.visible").and("not.be.disabled");
-
-        cy.contains("#tbodyid > div.row > div > a", "Add to cart")
-            .should("be.visible").and("not.be.disabled");
-
-        cy.contains("#tbodyid > div.row > div > a", "Add to cart").click({force: true});
+        cy.clickButton("#tbodyid > div.row > div > a", "Add to cart");
 
         cy.on('window:alert', function handler(txt: string) {
             expect(txt).to.contain('Product added.');
@@ -20,8 +14,6 @@ Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) =>
         cy.window().its('document.readyState').should('eq', 'complete');
 
         // back to home page
-        cy.contains("#nava", "PRODUCT STORE")
-            .should("be.visible").and("not.be.disabled");
-        cy.contains("#nava", "PRODUCT STORE").click({force: true});
+        cy.clickButton("#nava", "PRODUCT STORE")
     }
 });

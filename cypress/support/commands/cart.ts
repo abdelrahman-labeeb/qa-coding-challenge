@@ -1,8 +1,7 @@
 import {generateOrderInfo} from "../utils";
 
 Cypress.Commands.add("openCartAndValidateTotalOrderPrice", (numberOfProductsAddedToCart: number = 1) => {
-    cy.contains("#cartur", "Cart").should("be.visible").and("not.be.disabled");
-    cy.contains("#cartur", "Cart").click({ force: true });
+    cy.clickButton("#cartur", "Cart");
 
     // sum price column and compare with displayed total
     cy.get("#tbodyid tr")
@@ -36,29 +35,16 @@ Cypress.Commands.add("validateProductsSumPriceAndCartPrice", () => {
 Cypress.Commands.add("fillOrderInfo", () => {
     const orderInfo = generateOrderInfo();
 
-    cy.contains("button", "Place Order").should("be.visible").and("not.be.disabled");
-    cy.contains("button", "Place Order").click({ force: true });
+    cy.clickButtonContainsTxt("Place Order");
 
     cy.get('#orderModal').should('be.visible');
 
-    cy.get("#name").should("exist").and("be.visible").and("not.be.disabled");
-    cy.get("#name").type(orderInfo.customerFullName, {force: true});
-    cy.get('#name').should('have.value', orderInfo.customerFullName);
-
-    cy.get("#country").type(orderInfo.country, {force: true});
-    cy.get("#country").should("have.value", orderInfo.country);
-
-    cy.get("#city").type(orderInfo.city, {force: true});
-    cy.get("#city").should("have.value", orderInfo.city);
-
-    cy.get("#card").type(orderInfo.creditCardNumber, {force: true});
-    cy.get("#card").should("have.value", orderInfo.creditCardNumber);
-
-    cy.get("#month").type(orderInfo.expiryMonth, {force: true});
-    cy.get("#month").should("have.value", orderInfo.expiryMonth);
-
-    cy.get("#year").type(orderInfo.expiryYear, {force: true});
-    cy.get("#year").should("have.value", orderInfo.expiryYear);
+    cy.fillInput("#name", orderInfo.customerFullName);
+    cy.fillInput("#country", orderInfo.country);
+    cy.fillInput("#city", orderInfo.city);
+    cy.fillInput("#card", orderInfo.creditCardNumber);
+    cy.fillInput("#month", orderInfo.expiryMonth);
+    cy.fillInput("#year", orderInfo.expiryYear);
 });
 
 Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
@@ -70,8 +56,7 @@ Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
 
     cy.contains("Thank you for your purchase").should("be.visible");
 
-    cy.contains("OK").should("be.visible").and("not.be.disabled");
-    cy.contains("OK").click({ force: true });
+    cy.clickButtonContainsTxt("OK");
 
     cy.wait('@deleteCart').its('response.statusCode').should('eq', 200)
 
@@ -80,8 +65,7 @@ Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
     cy.window().its('document.readyState').should('eq', 'complete');
     cy.get("#cat").should("be.visible").and("not.be.disabled");
 
-    cy.contains("Cart").should("be.visible").and("not.be.disabled");
-    cy.contains("Cart").click({ force: true });
+    cy.clickButton("#cartur");
 
     cy.get("#tbodyid tr").should("have.length", 0);
 });
