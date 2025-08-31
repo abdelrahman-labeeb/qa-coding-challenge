@@ -24,8 +24,9 @@ Cypress.Commands.add("signup", (u?: string, p?: string) => {
 
     cy.wait('@signupRequest')
 
-    cy.on('window:alert', (text) => {
-        expect(text).to.contains("Sign up successful.");
+    cy.on('window:alert', function handler(txt: string) {
+        expect(txt).to.contain('Sign up successful.');
+        cy.off('window:alert', handler); // removes after one trigger
     });
 
     cy.window().its('document.readyState').should('eq', 'complete');

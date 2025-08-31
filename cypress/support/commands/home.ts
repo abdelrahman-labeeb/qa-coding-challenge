@@ -9,13 +9,15 @@ Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) =>
 
         cy.contains("#tbodyid > div.row > div > a", "Add to cart")
             .should("be.visible").and("not.be.disabled");
+
         cy.contains("#tbodyid > div.row > div > a", "Add to cart").click({force: true});
 
-        cy.intercept('POST', 'https://api.demoblaze.com/addtocart').as('addToCartRequest');
+        cy.on('window:alert', function handler(txt: string) {
+            expect(txt).to.contain('Product added.');
+            cy.off('window:alert', handler); // removes after one trigger
+        });
 
-        cy.on("window:alert", (txt) => expect(txt).to.contains("Product added"));
-
-        cy.wait('@addToCartRequest')
+        cy.window().its('document.readyState').should('eq', 'complete');
 
         // back to home page
         cy.contains("#nava", "PRODUCT STORE")
