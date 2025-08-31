@@ -1,3 +1,5 @@
+import homePage from "../../e2e/selectors/homePage";
+
 Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) => {
     cy.get(".card-title a").should("have.length.greaterThan", 0);
     for (let i = 0; i < numberOfProductsToAdd; i++) {
@@ -14,6 +16,6 @@ Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) =>
         cy.window().its('document.readyState').should('eq', 'complete');
 
         // back to home page
-        cy.clickButton("#nava", "PRODUCT STORE")
+        cy.clickButton(homePage.websiteLogo)
     }
 });

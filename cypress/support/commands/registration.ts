@@ -1,19 +1,20 @@
 import { faker } from "@faker-js/faker";
+import homePage from "../../e2e/selectors/homePage";
 
 Cypress.Commands.add("signup", (u?: string, p?: string) => {
     const username = u ?? `user_${Date.now()}`;
     const password = p ?? faker.internet.password({ length: 10 });
 
-    cy.clickButton("#signin2");
+    cy.clickButton(homePage.naviSignupButton);
 
-    cy.get('#signInModal').should('be.visible');
+    cy.get(homePage.signupOverlay).should('be.visible');
 
-    cy.fillInput("#sign-username", username)
-    cy.fillInput("#sign-password", password)
+    cy.fillInput(homePage.signupOverlayUsernameField, username)
+    cy.fillInput(homePage.signupOverlayPasswordField, password)
 
     cy.intercept('POST', 'https://api.demoblaze.com/signup').as('signupRequest');
 
-    cy.clickButton("#signInModal > div > div > div.modal-footer > button.btn.btn-primary", "Sign up");
+    cy.clickButton(homePage.signupOverlayLoginButton, "Sign up");
 
     cy.wait('@signupRequest')
 

@@ -8,7 +8,6 @@ import './commands/selector-utils';
 declare global {
     namespace Cypress {
         interface Chainable {
-
             registerClient(): Chainable<string>;
 
             openCartAndValidateTotalOrderPrice(numberOfProductsAddedToCart?: number): Chainable<void>;

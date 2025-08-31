@@ -1,7 +1,9 @@
 import {generateOrderInfo} from "../utils";
+import cartPage from "../../e2e/selectors/cartPage";
+import homePage from "../../e2e/selectors/homePage";
 
 Cypress.Commands.add("openCartAndValidateTotalOrderPrice", (numberOfProductsAddedToCart: number = 1) => {
-    cy.clickButton("#cartur", "Cart");
+    cy.clickButton(homePage.cartButton);
 
     // sum price column and compare with displayed total
     cy.get("#tbodyid tr")
@@ -37,22 +39,22 @@ Cypress.Commands.add("fillOrderInfo", () => {
 
     cy.clickButtonContainsTxt("Place Order");
 
-    cy.get('#orderModal').should('be.visible');
+    cy.get(cartPage.placeOrder.overlay).should('be.visible');
 
-    cy.fillInput("#name", orderInfo.customerFullName);
-    cy.fillInput("#country", orderInfo.country);
-    cy.fillInput("#city", orderInfo.city);
-    cy.fillInput("#card", orderInfo.creditCardNumber);
-    cy.fillInput("#month", orderInfo.expiryMonth);
-    cy.fillInput("#year", orderInfo.expiryYear);
+    cy.fillInput(cartPage.placeOrder.nameField, orderInfo.customerFullName);
+    cy.fillInput(cartPage.placeOrder.countryField, orderInfo.country);
+    cy.fillInput(cartPage.placeOrder.cityField, orderInfo.city);
+    cy.fillInput(cartPage.placeOrder.creditCardField, orderInfo.creditCardNumber);
+    cy.fillInput(cartPage.placeOrder.expiryMonthField, orderInfo.expiryMonth);
+    cy.fillInput(cartPage.placeOrder.expiryYearField, orderInfo.expiryYear);
 });
 
 Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
     // once order successfully completed, this request is fired to clear cart
     cy.intercept('POST', 'https://api.demoblaze.com/deletecart').as('deleteCart');
 
-    cy.contains("button", "Purchase").should("not.be.disabled");
-    cy.contains("button", "Purchase").click({ force: true });
+    cy.get(cartPage.placeOrder.PurchaseButton).should("not.be.disabled");
+    cy.get(cartPage.placeOrder.PurchaseButton).click({ force: true });
 
     cy.contains("Thank you for your purchase").should("be.visible");
 
@@ -63,9 +65,9 @@ Cypress.Commands.add("submitOderAndConfirmSuccessfulPurchase", () => {
 
     cy.visit("/");
     cy.window().its('document.readyState').should('eq', 'complete');
-    cy.get("#cat").should("be.visible").and("not.be.disabled");
+    cy.get(homePage.categoriesButton).should("exist").and("be.visible");
 
-    cy.clickButton("#cartur");
+    cy.clickButton(homePage.cartButton);
 
     cy.get("#tbodyid tr").should("have.length", 0);
 });
