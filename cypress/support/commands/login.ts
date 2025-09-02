@@ -23,6 +23,7 @@ Cypress.Commands.add("login", (username: string, password: string) => {
 Cypress.Commands.add("loginWithInvalidCredentials", (username: string, password: string, errMsg: string) => {
     cy.fillLoginModalAndSubmit(username, password);
     cy.get(homePage.loginOverlay).should("be.visible");
+
     cy.on('window:alert', function handler(txt: string) {
         expect(txt).to.contain(errMsg);
         cy.off('window:alert', handler); // removes after one trigger

@@ -10,9 +10,9 @@ declare global {
         interface Chainable {
             registerClient(): Chainable<string>;
 
-            openCartAndValidateTotalOrderPrice(numberOfProductsAddedToCart?: number): Chainable<void>;
+            openCartAndValidateTotalOrderPrice(numberOfProductsAddedToCart: number): Chainable<void>;
 
-            deleteProductFromCartAndValidateProductsSumPriceAndCartPrice(numberOfProductsInCart?: number): Chainable<void>;
+            deleteProductFromCartAndValidateProductsSumPriceAndCartPrice(numberOfProductsInCart: number): Chainable<void>;
 
             validateProductsSumPriceAndCartPrice(): Chainable<void>;
 
@@ -30,7 +30,7 @@ declare global {
 
             signup(u?: string, p?: string): Chainable<{username:string,password:string}>;
 
-            fillInput(selector: string, value?: string): Chainable<void>;
+            fillInput(selector: string, value: string): Chainable<void>;
 
             clickButton(selector: string, text?: string): Chainable<void>;
 

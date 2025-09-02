@@ -1,3 +1,6 @@
+import homePage from "../selectors/homePage";
+import cartPage from "../selectors/cartPage";
+
 describe("Demoblaze checkout tests", () => {
     const numberOfProductsToAdd = 3;
 
@@ -16,16 +19,16 @@ describe("Demoblaze checkout tests", () => {
     });
 
     it("purchase with empty form should fail", () => {
-        cy.clickButton("#cartur", "Cart");
-        cy.clickButtonContainsTxt("Place Order");
-        cy.get('#orderModal').should('be.visible');
-        cy.contains("button", "Purchase").should("not.be.disabled");
-        cy.contains("button", "Purchase").click({ force: true });
+        cy.clickButton(homePage.cartButton);
+        cy.clickButton(cartPage.placeOrderButton)
+        cy.get(cartPage.placeOrderOverlay.overlay).should('be.visible');
+        cy.clickButton(cartPage.placeOrderOverlay.purchaseButton);
 
         cy.on('window:alert', function handler(txt: string) {
             expect(txt).to.contain('Please fill out Name and Creditcard.');
             cy.off('window:alert', handler); // removes after one trigger
         });
-        cy.get("#orderModal").should("be.visible");
+
+        cy.get(cartPage.placeOrderOverlay.overlay).should('be.visible');
     });
 });

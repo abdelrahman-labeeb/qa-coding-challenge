@@ -20,6 +20,8 @@ const homePage = {
 
     // Categories
     categoriesButton: '[id="cat"]',
+
+    productTitle: '.card-title a'
 };
 
 export default homePage;

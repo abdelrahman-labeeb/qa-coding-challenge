@@ -4,6 +4,7 @@ import { defineConfig } from "cypress";
 export default defineConfig({
     screenshotsFolder: 'cypress/results/screenshots',
     videosFolder: 'cypress/results/videos',
+    watchForFileChanges: false,
     retries: {
         runMode: 2,
         openMode: 0

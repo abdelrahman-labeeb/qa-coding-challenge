@@ -1,14 +1,13 @@
-Cypress.Commands.add('fillInput', (selector: string, value?: string) => {
+Cypress.Commands.add('fillInput', (selector: string, value: string) => {
     const input = cy
         .get(selector)
         .should('exist')
         .and('not.be.disabled');
 
-    input.clear({force: true});
+    input.clear();
 
-    if (value) {
-        input.type(value, {force: true}).should('have.value', value);
-    }
+    input.type(value, )
+        .should('have.value', value);
 });
 
 Cypress.Commands.add('clickButton', (selector: string, text?: string) => {
@@ -24,7 +23,7 @@ Cypress.Commands.add('clickButton', (selector: string, text?: string) => {
             .and('not.be.disabled');
     }
 
-    button.click({force: true});
+    button.click();
 });
 
 Cypress.Commands.add('clickButtonContainsTxt', (text: string) => {
@@ -32,5 +31,5 @@ Cypress.Commands.add('clickButtonContainsTxt', (text: string) => {
         .should('exist')
         .and('not.be.disabled');
 
-    button.click({force: true});
+    button.click();
 });

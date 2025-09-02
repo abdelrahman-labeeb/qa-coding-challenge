@@ -1,12 +1,13 @@
 import homePage from "../../e2e/selectors/homePage";
+import productPage from "../../e2e/selectors/productPage";
 
 Cypress.Commands.add("addProductsToCart", (numberOfProductsToAdd: number = 1) => {
-    cy.get(".card-title a").should("have.length.greaterThan", 0);
+    cy.get(homePage.productTitle).should("have.length.greaterThan", 0);
     for (let i = 0; i < numberOfProductsToAdd; i++) {
-        cy.get(".card-title a").eq(i).should("be.visible").and("not.be.disabled");
-        cy.get(".card-title a").eq(i).click({force: true});
+        cy.get(homePage.productTitle).eq(i).should("be.visible").and("not.be.disabled");
+        cy.get(homePage.productTitle).eq(i).click();
 
-        cy.clickButton("#tbodyid > div.row > div > a", "Add to cart");
+        cy.clickButton(productPage.addToCartButton, "Add to cart");
 
         cy.on('window:alert', function handler(txt: string) {
             expect(txt).to.contain('Product added.');
