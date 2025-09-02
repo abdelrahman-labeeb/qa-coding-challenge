@@ -2,11 +2,10 @@ Cypress.Commands.add('fillInput', (selector: string, value: string) => {
     const input = cy
         .get(selector)
         .should('exist')
-        .and('not.be.disabled');
+        .should('not.be.disabled');
 
-    input.clear();
-
-    input.type(value, )
+    input.clear()
+        .type(value, {force: true})
         .should('have.value', value);
 });
 
