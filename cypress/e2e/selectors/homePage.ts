@@ -1,10 +1,17 @@
 const homePage = {
     // Navigation
     websiteLogo: '[id="nava"]',
+    contactButton: '#navbarExample > ul > li:nth-child(2) > a',
     cartButton: '[id="cartur"]',
+    naviLogoutButton: '[id="logout2"]',
     naviLoginButton: '[id="login2"]',
     naviSignupButton: '[id="signin2"]',
     naviNameOfUserButton: '[id="nameofuser"]',
+
+    // Contact Overlay
+    contactEmailField: '[id="recipient-email"]',
+    contactNameField: '[id="recipient-name"]',
+    contactMessageField: '[id="message-text"]',
 
     // Login Overlay
     loginOverlay: '[id="logInModal"]',
