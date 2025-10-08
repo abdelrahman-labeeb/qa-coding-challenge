@@ -2,6 +2,7 @@ import { defineConfig } from "cypress";
 
 // TODO: Add reporter
 export default defineConfig({
+    projectId: "k6psyg",
     screenshotsFolder: 'cypress/results/screenshots',
     videosFolder: 'cypress/results/videos',
     watchForFileChanges: false,
