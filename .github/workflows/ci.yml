@@ -12,6 +12,10 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
       - name: Run UI tests
+        with:
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         run: npx cypress info && npx cypress run --browser chrome --spec "cypress/e2e/ui/**/*.cy.ts" --config video=true
 
       - name: Upload Cypress videos
@@ -38,4 +42,8 @@ jobs:
         with: { node-version: 20, cache: npm }
       - run: npm ci
       - name: Run API tests
+        with:
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         run: npx cypress info && npx cypress run --spec "cypress/e2e/api/**/*.cy.ts"
