@@ -16,7 +16,7 @@ jobs:
       - name: Run UI tests
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-        run: npx cypress info && npx cypress run --browser chrome --spec "cypress/e2e/ui/**/*.cy.ts" --config video=true --record
+        run: npx cypress info && npx cypress run --browser chrome --spec "cypress/e2e/ui/**/*.cy.ts" --config video=true --record --parallel
 
       - name: Upload Cypress videos
         uses: actions/upload-artifact@v4
